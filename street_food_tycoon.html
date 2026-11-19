@@ -298,7 +298,7 @@ addEventListener('pointerdown',()=>{try{AC=AC||new(window.AudioContext||window.w
 function setOpen(){$('adm').hidden=false;
  const t=(k,l)=>`<div class="row"><span>${l}</span><button class="btn" style="min-width:90px;${S[k]?'':'background:#9aa5ae'}" onclick="S.${k}=S.${k}?0:1;save();setOpen();${k=='vib'?'vib(40)':'sCoin()'}">${S[k]?'Вкл':'Выкл'}</button></div>`;
  $('ab').innerHTML=`<h3>⚙️ Настройки</h3>${t('snd','🔊 Звук')}${t('vib','📳 Вибрация')}<div class="row"><span>👤 Имя</span><input value="${esc(S.name)}" maxlength="14" onchange="S.name=esc(this.value).slice(0,14);save()" style="width:55%;padding:9px;font-size:16px"></div><div class="gr" style="margin-top:12px"><button class="btn" onclick="sClick();prof(-1)">👤 Мой профиль</button><button class="btn" style="background:#9aa5ae" onclick="sClick();$('adm').hidden=true">Закрыть</button></div>`}
-const pdata=()=>({id:S.id,n:S.name||'Игрок',l:S.lv,s:Math.floor(S.lv*1000+Math.min(999,S.earn/goal()*1000)),c:Math.floor(S.coins),g:S.gems,cr:S.created,pt:Math.floor(S.pt||0),ls:{'.sv':'timestamp'}});
+const pdata=()=>({n:S.name||'Игрок',l:S.lv,s:Math.floor(S.lv*1000+Math.min(999,S.earn/goal()*1000)),c:Math.floor(S.coins),g:S.gems,cr:S.created,pt:Math.floor(S.pt||0),ls:{'.sv':'timestamp'}});
 setInterval(()=>{if(S.sent&&!S.cheat&&LB_URL&&!document.hidden)fetch(`${LB_URL}/scores/${S.id}.json`,{method:'PATCH',body:JSON.stringify(pdata())}).catch(()=>{})},60000);
 setInterval(()=>{if(!$('adm').hidden&&$('lbl'))lbShow()},15000);
 const fmtD=t=>t?new Date(t).toLocaleDateString('ru-RU'):'—';
